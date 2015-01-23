@@ -16,7 +16,7 @@ The data set itself consists of two subsets of data -- one for subjects in a "te
 
 - X_[subset].txt -- the raw data of 561 measurements for a given subject in a given activity
 - y_[subset].txt -- the activity code for the given observation
-- subject_[subset}.txt -- the subject ID for the given observation
+- subject_[subset].txt -- the subject ID for the given observation
 
 in addition to those files, there are several files that document these data files:
 

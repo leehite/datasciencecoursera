@@ -1,0 +1,47 @@
+The Raw Data
+------------
+As noted in the README.md, we start with six raw data files:
+
+for the "test" subset (n = 2947):
+1) X_test.txt -- the raw data of 561 measurements for a given subject in a given activity
+2) y_test.txt -- the activity code for the given observation
+3) subject_test.txt -- the subject ID for the given observation
+
+and for the "training" subset (n = 7352):
+
+1) X_test.txt -- the raw data of 561 measurements for a given subject in a given activity
+2) y_test.txt -- the activity code for the given observation
+3) subject_test.txt -- the subject ID for the given observation
+
+also, two files that give us descriptive names for the features measured in the X_[subset] files and the activities coded in the y_[subset] files:
+
+1) features.txt
+2) activity_labels.txt
+
+For details on exactly what these measurements are, please see:
+
+	http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones#
+	
+The run_analysis.R script reads in these six raw data files, and then uses the latter two files to assign variable names to the resulting data frames.  A new variable is added to the subjects tables to indicate which subset the subject was assigned to so that when the final data set is generated you will be able to visually note to which group a given subject belongs.
+
+Data Summary
+------------
+For our purposes here, we are only interested in the mean() and std() measurements, so we have extracted just those measurements from the data.  At this point in our data cleaning, we have two data frames, one for each set of subjects.  If you are only interested in one set, follow the instructions in the comments.  Otherwise, what you end up with is a combined set, but you still have a "dataSet" column which you can use to subset the data at a later time if desired.
+
+Finally, we have run a summary analysis of the resulting data set by computing means of all the measured variables grouped by subject by activity.  The output of that file is:
+
+	means_by_subject_by_activity.csv
+
+Should you want to read this file into an R table for further analysis, the command would be:
+
+	x <- read.csv("./output/means_by_subject_by_activity.csv", header=TRUE)    
+
+This should give you a data frame consisting of 180 rows (30 subjects x 6 activities) by 81 columns (subjectID, activity, and 79 means of the various features measured for that subject in that activity).
+
+
+
+
+
+
+
+
