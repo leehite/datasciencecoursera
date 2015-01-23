@@ -4,6 +4,6 @@ This is the repository for my assignments in various courses in the Data Science
 
 *Some relevant links:
 
-	[Data Science Specialization Community Site] (http://datasciencespecialization.github.io/)
+	[Data Science Specialization Community Site](http://datasciencespecialization.github.io/)
 
-	[Course Dependency Chart] (https://d396qusza40orc.cloudfront.net/rprog/doc/JHDSS_CourseDependencies.pdf)
+	[Course Dependency Chart](https://d396qusza40orc.cloudfront.net/rprog/doc/JHDSS_CourseDependencies.pdf)
