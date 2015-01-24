@@ -2,34 +2,31 @@
 #
 #  see README.md for more info
 
-# these are the R libraries requited for this script
+# these are the R libraries required for this script
 library(plyr)
 library(reshape2)
 
+# IMPORTANT: script assumes that data has been downloaded and
+# unzipped to the working directory, which should give you a
+# subdir named ./accData.  edit the line below to insure that
+# the working directory for the script is the directory where
+# this accData dir is located
+
+setwd("F:/coursera/3 Getting and Cleaning Data/course project")
+
 ########## process raw data ##########
 
-# data will be stored to ./data dir
-# output will be saved to ./output dir
-if (!file.exists("./data")) {dir.create("./data")}
-if (!file.exists("./output")) {dir.create("./output")}
-
-# download and unzip the data 
-fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-destFile <- "./data/accData.zip"
-download.file(fileURL,destFile)
-unzip(destFile,exdir="./data/accData")
-
 # read various files to tables
-activities <- read.table("./data/accData/UCI HAR Dataset/activity_labels.txt")
-features <- read.table("./data/accData/UCI HAR Dataset/features.txt")
+activities <- read.table("./accData/UCI HAR Dataset/activity_labels.txt")
+features <- read.table("./accData/UCI HAR Dataset/features.txt")
 
-testXData <- read.table("./data/accData/UCI HAR Dataset/test/X_test.txt")
-testYData <- read.table("./data/accData/UCI HAR Dataset/test/Y_test.txt")
-testSubjects <- read.table("./data/accData/UCI HAR Dataset/test/subject_test.txt")
+testXData <- read.table("./accData/UCI HAR Dataset/test/X_test.txt")
+testYData <- read.table("./accData/UCI HAR Dataset/test/Y_test.txt")
+testSubjects <- read.table("./accData/UCI HAR Dataset/test/subject_test.txt")
 
-trainingXData <- read.table("./data/accData/UCI HAR Dataset/train/X_train.txt")
-trainingYData <- read.table("./data/accData/UCI HAR Dataset/train/Y_train.txt")
-trainingSubjects <- read.table("./data/accData/UCI HAR Dataset/train/subject_train.txt")
+trainingXData <- read.table("./accData/UCI HAR Dataset/train/X_train.txt")
+trainingYData <- read.table("./accData/UCI HAR Dataset/train/Y_train.txt")
+trainingSubjects <- read.table("./accData/UCI HAR Dataset/train/subject_train.txt")
 
 # give some meaningful names to these data frames
 colnames(activities) <- c("activityID","activity")
@@ -68,8 +65,8 @@ allData <- rbind(testData,trainingData)
 
 # write out the appropriate table.  note that if all you are
 # interested in is one of the subsets, just change 'allData" to
-# wither 'testData' or 'trainingData' in the line below
-write.csv(allData, "./output/allData.csv", row.names=FALSE)
+# either 'testData' or 'trainingData' in the line below
+write.csv(allData, "allData.csv", row.names=FALSE)
 
 ########## create summary table ##########
 
@@ -80,5 +77,5 @@ allData$activityID <- NULL
 outputMelt <- melt(allData,id=c("subjectID","activity"))
 output <- dcast(outputMelt,subjectID + activity ~ variable, mean)
 # write it out
-write.csv(output,"./output/means_by_subject_by_activity.csv",
+write.csv(output,"means_by_subject_by_activity.csv",
           row.names=FALSE)
